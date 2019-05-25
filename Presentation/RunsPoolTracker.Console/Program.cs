@@ -27,6 +27,7 @@ namespace RunsPoolTrackerConsole
                 Console.WriteLine("");
             }
 
+            Console.WriteLine("Press the any key to exit...");
             Console.ReadLine();
         }
     }
