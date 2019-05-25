@@ -11,6 +11,4 @@ namespace RunsPoolTracker.Model
         [JsonProperty("gameScore")]
         public List<GameScore> GameScore { get; set; }
     }
-
-
 }

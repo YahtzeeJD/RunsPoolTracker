@@ -28,6 +28,4 @@ namespace RunsPoolTracker.Model
         [JsonProperty("inningSummary")]
         public InningSummary InningSummary { get; set; }
     }
-
-
 }

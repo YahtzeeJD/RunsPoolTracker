@@ -16,6 +16,4 @@ namespace RunsPoolTracker.Model
         [JsonProperty("delayedOrPostponedReason")]
         public object DelayedOrPostponedReason { get; set; }
     }
-
-
 }

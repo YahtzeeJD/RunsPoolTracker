@@ -12,18 +12,14 @@ namespace RunsPoolTracker.AppService
         private const string BASE_URL = "https://api.mysportsfeeds.com/";
         private MySportsFeedsClient mySportsFeedsClient;
 
-        public async Task<ScoreboardResponse> GetScoreboardData(string username, string password, string version, string forDate)
+        public async Task<ScoreboardResponse> GetScoreboardData(string username, string password, string version, DateTime forDate)
         {
             try
             {
                 mySportsFeedsClient = new MySportsFeedsClient(BASE_URL, League.MLB, version, username, password);
 
-                var reformattedForDate = $"{forDate.Substring(4, 2)}/{forDate.Substring(6, 2)}/{forDate.Substring(0, 4)}";
-                var forDateYear = DateTime.Parse(reformattedForDate).Year;
-                var requestOptions = new RequestOptions()
-                {
-                    ForDate = forDate
-                };
+                var forDateYear = forDate.Year;
+                var requestOptions = new RequestOptions() { ForDate = FormatForDateForApi(forDate) };
 
                 return await mySportsFeedsClient.ScoreboardDataRetriever.Get(forDateYear, SeasonType.Regular, requestOptions);
             }
@@ -32,6 +28,15 @@ namespace RunsPoolTracker.AppService
                 Console.WriteLine(ex.InnerException);
                 throw ex;
             }
+        }
+
+        private static string FormatForDateForApi(DateTime forDate)
+        {
+            var year = forDate.Year.ToString();
+            var monthWithLeadingZero = "0" + forDate.Month.ToString();
+            var month = monthWithLeadingZero.Substring(monthWithLeadingZero.Length - 2);
+            var day = forDate.Day.ToString();
+            return $"{year}{month}{day}";
         }
     }
 }

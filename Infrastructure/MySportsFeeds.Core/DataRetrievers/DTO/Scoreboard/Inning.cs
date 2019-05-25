@@ -13,6 +13,4 @@ namespace RunsPoolTracker.Model
         [JsonProperty("homeScore")]
         public string HomeScore { get; set; }
     }
-
-
 }

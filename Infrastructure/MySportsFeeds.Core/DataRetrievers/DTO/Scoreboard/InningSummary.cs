@@ -8,6 +8,4 @@ namespace RunsPoolTracker.Model
         [JsonProperty("inning")]
         public List<Inning> Inning { get; set; }
     }
-
-
 }
