@@ -1,5 +1,5 @@
-﻿using MySportsFeeds.Core;
-using MySportsFeeds.Core.Enums;
+﻿using MySportsFeeds.Core.Helpers;
+using RunsPoolTracker.AppService;
 using System;
 
 namespace RunsPoolTrackerConsole
@@ -8,18 +8,26 @@ namespace RunsPoolTrackerConsole
     {
         #region Members
 
-        private static readonly string BASE_URL = "https://api.mysportsfeeds.com/";
-        private static readonly string VERSION = "v1.2";
-        private static readonly string USERNAME = "a764bfc4-56b8-48a9-a703-9a5007";
-        private static readonly string PASSWORD = "CPGTQn2zPngu";
+        private const string VERSION = "v1.2";
+        private const string USERNAME = "a764bfc4-56b8-48a9-a703-9a5007";
+        private const string PASSWORD = "CPGTQn2zPngu";
 
         #endregion Members
 
-        static protected MySportsFeedsClient mySportsFeedsClient;
-
         private static void Main(string[] args)
         {
-            mySportsFeedsClient = new MySportsFeedsClient(BASE_URL, League.MLB, VERSION, USERNAME, PASSWORD);
+            string FOR_DATE = "20190520";
+            var appService = new MlbAppService();
+            var scoreboardData = appService.GetScoreboardData(USERNAME, PASSWORD, VERSION, FOR_DATE).GetAwaiter().GetResult();
+
+            foreach(var gameScore in scoreboardData.Scoreboard.GameScore)
+            {
+                Console.WriteLine($"{gameScore.Game.HomeTeam.Name}: {gameScore.HomeScore}");
+                Console.WriteLine($"{gameScore.Game.AwayTeam.Name}: {gameScore.AwayScore}");
+                Console.WriteLine("");
+            }
+
+            Console.ReadLine();
         }
     }
 }

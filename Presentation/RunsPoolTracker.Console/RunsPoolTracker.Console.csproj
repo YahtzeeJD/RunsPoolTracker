@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AppService\RunsPoolTracker.AppService\RunsPoolTracker.AppService.csproj" />
     <ProjectReference Include="..\..\Infrastructure\MySportsFeeds.Core\MySportsFeeds.Core.csproj" />
   </ItemGroup>
 
