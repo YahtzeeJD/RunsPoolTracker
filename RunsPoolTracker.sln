@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{149A4E8D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{EEF49861-1471-4FAB-A82E-C3164727FA73}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{1CC09355-4092-4F96-9F31-DC524383D9CB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySportsFeeds.Core.Tests", "Infrastructure\MySportsFeeds.Core.Tests\MySportsFeeds.Core.Tests.csproj", "{A278BBD4-5B32-4FF2-937F-A07A6CA2166B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySportsFeeds.Core", "Infrastructure\MySportsFeeds.Core\MySportsFeeds.Core.csproj", "{0E8AACF7-61D2-4AEE-BA9D-D24CF421D776}"
@@ -23,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunsPoolTracker.Console", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{64FA359B-79E5-4FED-92C4-90A97A919F3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunsPoolTracker.AppService", "AppService\RunsPoolTracker.AppService\RunsPoolTracker.AppService.csproj", "{487F5957-21D3-4BCA-9E24-C6DFD85763B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunsPoolTracker.AppService", "AppService\RunsPoolTracker.AppService\RunsPoolTracker.AppService.csproj", "{487F5957-21D3-4BCA-9E24-C6DFD85763B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,7 +55,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EEF49861-1471-4FAB-A82E-C3164727FA73} = {6EE776A9-FAE0-407B-84E6-61EBE48AA47F}
-		{1CC09355-4092-4F96-9F31-DC524383D9CB} = {6EE776A9-FAE0-407B-84E6-61EBE48AA47F}
 		{A278BBD4-5B32-4FF2-937F-A07A6CA2166B} = {4DE69645-C2AA-472F-8831-1A247DF12130}
 		{0E8AACF7-61D2-4AEE-BA9D-D24CF421D776} = {4DE69645-C2AA-472F-8831-1A247DF12130}
 		{63A3266C-1E9D-4EA9-A319-BF93128C78C5} = {149A4E8D-D06D-4CA5-90E2-B7DE8C7BFB50}
