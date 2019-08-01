@@ -1,4 +1,5 @@
-﻿using MySportsFeeds.Core.Enums;
+﻿using MySportsFeeds.Core.DataRetrievers.DTO.Common;
+using MySportsFeeds.Core.Enums;
 using MySportsFeeds.Core.Helpers;
 using MySportsFeeds.Core.Workers;
 using RunsPoolTracker.Model;
@@ -35,12 +36,12 @@ namespace MySportsFeeds.Core.DataRetrievers
         /// <param name="seasonType">Type of the season.</param>
         /// <param name="requestOptions">The request options.</param>
         /// <returns></returns>
-        public async Task<ScoreboardResponse> Get(int year, SeasonType seasonType, RequestOptions requestOptions = null)
+        public async Task<ScoreboardResponseDto> Get(int year, SeasonType seasonType, RequestOptions requestOptions = null)
         {
             var url = string.Concat(_httpWorker.Version, Url);
             string requestUrl = UrlBuilder.FormatRestApiUrl(url, year, seasonType, requestOptions);
 
-            return await _httpWorker.GetAsync<ScoreboardResponse>(requestUrl).ConfigureAwait(false);
+            return await _httpWorker.GetAsync<ScoreboardResponseDto>(requestUrl).ConfigureAwait(false);
         }
     }
 }

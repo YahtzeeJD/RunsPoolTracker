@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.645
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{4DE69645-C2AA-472F-8831-1A247DF12130}"
 EndProject
@@ -22,6 +22,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{64FA359B-79E5-4FED-92C4-90A97A919F3E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunsPoolTracker.AppService", "AppService\RunsPoolTracker.AppService\RunsPoolTracker.AppService.csproj", "{487F5957-21D3-4BCA-9E24-C6DFD85763B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{0D515F74-2B4A-486A-9456-651CFAF58E94}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunsPoolTracker.Web", "Presentation\Web\RunsPoolTracker.Web\RunsPoolTracker.Web.csproj", "{30FDA3F0-A55F-44F4-B46E-DFF4775E6E23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Razor", "Razor", "{E8F11E84-C10F-4851-88B4-BDB193F93B15}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunsPoolTracker.Razor", "Presentation\Razor\RunsPoolTracker.Razor\RunsPoolTracker.Razor.csproj", "{79F8EE31-D6C7-4F96-8445-D0194A68B30F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +57,14 @@ Global
 		{487F5957-21D3-4BCA-9E24-C6DFD85763B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{487F5957-21D3-4BCA-9E24-C6DFD85763B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{487F5957-21D3-4BCA-9E24-C6DFD85763B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30FDA3F0-A55F-44F4-B46E-DFF4775E6E23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30FDA3F0-A55F-44F4-B46E-DFF4775E6E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30FDA3F0-A55F-44F4-B46E-DFF4775E6E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30FDA3F0-A55F-44F4-B46E-DFF4775E6E23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79F8EE31-D6C7-4F96-8445-D0194A68B30F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79F8EE31-D6C7-4F96-8445-D0194A68B30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79F8EE31-D6C7-4F96-8445-D0194A68B30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79F8EE31-D6C7-4F96-8445-D0194A68B30F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +76,10 @@ Global
 		{63A3266C-1E9D-4EA9-A319-BF93128C78C5} = {149A4E8D-D06D-4CA5-90E2-B7DE8C7BFB50}
 		{3046A0BA-B6BD-4E14-A070-617AB7903ECF} = {EEF49861-1471-4FAB-A82E-C3164727FA73}
 		{487F5957-21D3-4BCA-9E24-C6DFD85763B7} = {64FA359B-79E5-4FED-92C4-90A97A919F3E}
+		{0D515F74-2B4A-486A-9456-651CFAF58E94} = {6EE776A9-FAE0-407B-84E6-61EBE48AA47F}
+		{30FDA3F0-A55F-44F4-B46E-DFF4775E6E23} = {0D515F74-2B4A-486A-9456-651CFAF58E94}
+		{E8F11E84-C10F-4851-88B4-BDB193F93B15} = {6EE776A9-FAE0-407B-84E6-61EBE48AA47F}
+		{79F8EE31-D6C7-4F96-8445-D0194A68B30F} = {E8F11E84-C10F-4851-88B4-BDB193F93B15}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1304018-AE97-4AF5-A5D6-BDE6021AAA00}

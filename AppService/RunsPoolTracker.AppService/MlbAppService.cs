@@ -1,8 +1,12 @@
-﻿using MySportsFeeds.Core;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
+using MySportsFeeds.Core;
+using MySportsFeeds.Core.DataRetrievers.DTO.Common;
 using MySportsFeeds.Core.Enums;
 using MySportsFeeds.Core.Helpers;
 using RunsPoolTracker.Model;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace RunsPoolTracker.AppService
@@ -10,24 +14,56 @@ namespace RunsPoolTracker.AppService
     public class MlbAppService
     {
         private const string BASE_URL = "https://api.mysportsfeeds.com/";
-        private MySportsFeedsClient mySportsFeedsClient;
+        private MySportsFeedsClient _mySportsFeedsClient;
+        private readonly IConfigurationRoot _configuration;
 
-        public async Task<ScoreboardResponse> GetScoreboardData(string username, string password, string version, DateTime forDate)
+        public MlbAppService()
+        {
+            _configuration = InitializeConfiguration();
+            _mySportsFeedsClient = new MySportsFeedsClient(BASE_URL, League.MLB, _configuration["api_version"], _configuration["username"], _configuration["password"]);
+        }
+
+        public async Task<ScoreboardResponse> GetScoreboardData(DateTime forDate)
         {
             try
             {
-                mySportsFeedsClient = new MySportsFeedsClient(BASE_URL, League.MLB, version, username, password);
-
                 var forDateYear = forDate.Year;
                 var requestOptions = new RequestOptions() { ForDate = FormatForDateForApi(forDate) };
+                var scoreboardResponseDto = await _mySportsFeedsClient.ScoreboardDataRetriever.Get(forDateYear, SeasonType.Regular, requestOptions);
 
-                return await mySportsFeedsClient.ScoreboardDataRetriever.Get(forDateYear, SeasonType.Regular, requestOptions);
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<ScoreboardResponseDto, ScoreboardResponse>();
+                    cfg.CreateMap<ScoreboardDto, Scoreboard>();
+                    cfg.CreateMap<GameScoreDto, GameScore>();
+                    cfg.CreateMap<ScoreboardGameDto, ScoreboardGame>();
+                    cfg.CreateMap<InningSummaryDto, InningSummary>();
+                    cfg.CreateMap<GameDto, Game>();
+                    cfg.CreateMap<TeamDto, Team>();
+                    cfg.CreateMap<HomeTeamDto, HomeTeam>();
+                    cfg.CreateMap<AwayTeamDto, AwayTeam>();
+                    cfg.CreateMap<InningDto, Inning>();
+                });
+                IMapper iMapper = config.CreateMapper();
+                var scoreboardResponse = iMapper.Map<ScoreboardResponseDto, ScoreboardResponse>(scoreboardResponseDto);
+                
+                return scoreboardResponse;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.InnerException);
                 throw ex;
             }
+        }
+
+        #region Helpers
+
+        private static IConfigurationRoot InitializeConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json");
+            var configuration = builder.Build();
+            return configuration;
         }
 
         private static string FormatForDateForApi(DateTime forDate)
@@ -38,5 +74,7 @@ namespace RunsPoolTracker.AppService
             var day = forDate.Day.ToString();
             return $"{year}{month}{day}";
         }
+
+        #endregion
     }
 }

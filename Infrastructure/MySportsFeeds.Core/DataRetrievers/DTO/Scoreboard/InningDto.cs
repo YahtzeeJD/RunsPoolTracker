@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace RunsPoolTracker.Model
+namespace MySportsFeeds.Core.DataRetrievers.DTO.Common
 {
-    public class Inning
+    public class InningDto
     {
         [JsonProperty("@number")]
         public string Number { get; set; }

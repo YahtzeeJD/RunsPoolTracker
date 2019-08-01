@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace RunsPoolTracker.Model
+namespace MySportsFeeds.Core.DataRetrievers.DTO.Common
 {
-    public class ScoreboardGame : Game
+    public class ScoreboardGameDto : GameDto
     {
         [JsonProperty("scheduleStatus")]
         public string ScheduleStatus { get; set; }

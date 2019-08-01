@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace RunsPoolTracker.Model
+namespace MySportsFeeds.Core.DataRetrievers.DTO.Common
 {
     /// <summary>
     /// Base Team
     /// </summary>
-    public class Team
+    public class TeamDto
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -44,15 +44,11 @@ namespace RunsPoolTracker.Model
         public string Abbreviation { get; set; }
     }
 
-    public class AwayTeam : Team
+    public class AwayTeamDto : TeamDto
     {
     }
 
-    public class HomeTeam : Team
-    {
-    }
-
-    public class Team2 : Team
+    public class HomeTeamDto : TeamDto
     {
     }
 }
