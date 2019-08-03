@@ -57,7 +57,7 @@ namespace RunsPoolTracker.Model
             }
         }
 
-        private static List<RunsDates> PopulateAllRunsDates()
+        private List<RunsDates> PopulateAllRunsDates()
         {
             var runsDatesCollection = new List<RunsDates>();
             var runs = 0;
@@ -72,21 +72,40 @@ namespace RunsPoolTracker.Model
             return runsDatesCollection;
         }
 
-        public void ComputeRunsForDailyGames(GameScore gameScore)
+        public void AddRunsForTeamByDate(DateTime forDate, string teamName, string teamScore)
         {
-            if (int.Parse(gameScore.HomeScore) > 13) gameScore.HomeScore = "13";
-            if (int.Parse(gameScore.AwayScore) > 13) gameScore.AwayScore = "13";
+            if (int.Parse(teamScore) > 13) teamScore = "13";
 
             RunsDates runsDate;
             runsDate = ListOfTeamRuns
-                .Where(t => t.TeamName == gameScore.Game.HomeTeam.Name).SingleOrDefault()
-                .RunsDatesCollection.Where(r => r.Runs == int.Parse(gameScore.HomeScore)).SingleOrDefault();
-            runsDate.Dates.Add(Convert.ToDateTime(gameScore.Game.Date));
-
-            runsDate = ListOfTeamRuns
-                .Where(t => t.TeamName == gameScore.Game.AwayTeam.Name).SingleOrDefault()
-                .RunsDatesCollection.Where(r => r.Runs == int.Parse(gameScore.AwayScore)).SingleOrDefault();
-            runsDate.Dates.Add(Convert.ToDateTime(gameScore.Game.Date));
+                .Where(t => t.TeamName == teamName).SingleOrDefault()
+                .RunsDatesCollection.Where(r => r.Runs == int.Parse(teamScore)).SingleOrDefault();
+            runsDate.Dates.Add(Convert.ToDateTime(forDate));
         }
+
+        public List<RemainingRunsForTeam> ComputeRemainingRunsByTeam()
+        {
+            var remainingRuns = new List<RemainingRunsForTeam>();
+            foreach (var teamRuns in ListOfTeamRuns)
+            {
+                var remainingRunsForTeam = new RemainingRunsForTeam(teamRuns);
+                remainingRuns.Add(remainingRunsForTeam);
+            }
+
+            return remainingRuns;
+        }
+
+        public List<DateOfRunsForTeam> ComputeDateOfRunsForTeams()
+        {
+            var dateOfRunsForTeams = new List<DateOfRunsForTeam>();
+            foreach (var teamRuns in ListOfTeamRuns)
+            {
+                var dateOfRunsForTeam = new DateOfRunsForTeam(teamRuns);
+                dateOfRunsForTeams.Add(dateOfRunsForTeam);
+            }
+
+            return dateOfRunsForTeams;
+        }
+
     }
 }

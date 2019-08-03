@@ -2,7 +2,6 @@
 using MySportsFeeds.Core.Enums;
 using MySportsFeeds.Core.Helpers;
 using MySportsFeeds.Core.Workers;
-using RunsPoolTracker.Model;
 using System.Threading.Tasks;
 
 namespace MySportsFeeds.Core.DataRetrievers

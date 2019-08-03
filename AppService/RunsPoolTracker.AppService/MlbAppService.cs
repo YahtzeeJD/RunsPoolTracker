@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using MySportsFeeds.Core;
-using MySportsFeeds.Core.DataRetrievers.DTO.Common;
 using MySportsFeeds.Core.Enums;
 using MySportsFeeds.Core.Helpers;
 using RunsPoolTracker.Model;
@@ -23,7 +21,7 @@ namespace RunsPoolTracker.AppService
             _mySportsFeedsClient = new MySportsFeedsClient(BASE_URL, League.MLB, _configuration["api_version"], _configuration["username"], _configuration["password"]);
         }
 
-        public async Task<ScoreboardResponse> GetScoreboardData(DateTime forDate)
+        public async Task<TeamRunsCollection> UpdateTeamRunsCollectionForDate(TeamRunsCollection teamRunsCollection, DateTime forDate)
         {
             try
             {
@@ -31,22 +29,23 @@ namespace RunsPoolTracker.AppService
                 var requestOptions = new RequestOptions() { ForDate = FormatForDateForApi(forDate) };
                 var scoreboardResponseDto = await _mySportsFeedsClient.ScoreboardDataRetriever.Get(forDateYear, SeasonType.Regular, requestOptions);
 
-                var config = new MapperConfiguration(cfg => {
-                    cfg.CreateMap<ScoreboardResponseDto, ScoreboardResponse>();
-                    cfg.CreateMap<ScoreboardDto, Scoreboard>();
-                    cfg.CreateMap<GameScoreDto, GameScore>();
-                    cfg.CreateMap<ScoreboardGameDto, ScoreboardGame>();
-                    cfg.CreateMap<InningSummaryDto, InningSummary>();
-                    cfg.CreateMap<GameDto, Game>();
-                    cfg.CreateMap<TeamDto, Team>();
-                    cfg.CreateMap<HomeTeamDto, HomeTeam>();
-                    cfg.CreateMap<AwayTeamDto, AwayTeam>();
-                    cfg.CreateMap<InningDto, Inning>();
-                });
-                IMapper iMapper = config.CreateMapper();
-                var scoreboardResponse = iMapper.Map<ScoreboardResponseDto, ScoreboardResponse>(scoreboardResponseDto);
-                
-                return scoreboardResponse;
+                if (scoreboardResponseDto == null) return teamRunsCollection;
+                if (scoreboardResponseDto.Scoreboard.GameScore == null) return teamRunsCollection;
+
+                foreach (var gameScore in scoreboardResponseDto.Scoreboard.GameScore)
+                {
+                    if (gameScore.IsCompleted == "false") continue;
+
+                    var homeTeamName = gameScore.Game.HomeTeam.Name;
+                    var homeTeamScore = gameScore.HomeScore;
+                    teamRunsCollection.AddRunsForTeamByDate(forDate, homeTeamName, homeTeamScore);
+
+                    var awayTeamName = gameScore.Game.AwayTeam.Name;
+                    var awayTeamScore = gameScore.AwayScore;
+                    teamRunsCollection.AddRunsForTeamByDate(forDate, awayTeamName, awayTeamScore);
+                }
+
+                return teamRunsCollection;
             }
             catch (Exception ex)
             {
