@@ -83,6 +83,13 @@ namespace RunsPoolTracker.Model
             runsDate.Dates.Add(Convert.ToDateTime(forDate));
         }
 
+        public bool RoundIsOver {
+            get
+            {
+                return ComputeRemainingRunsByTeam().Any(x => x.RemainingRuns.Count == 0);
+            }
+        }
+
         public List<RemainingRunsForTeam> ComputeRemainingRunsByTeam()
         {
             var remainingRuns = new List<RemainingRunsForTeam>();

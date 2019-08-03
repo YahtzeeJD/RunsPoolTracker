@@ -21,7 +21,24 @@ namespace RunsPoolTracker.AppService
             _mySportsFeedsClient = new MySportsFeedsClient(BASE_URL, League.MLB, _configuration["api_version"], _configuration["username"], _configuration["password"]);
         }
 
-        public async Task<TeamRunsCollection> UpdateTeamRunsCollectionForDate(TeamRunsCollection teamRunsCollection, DateTime forDate)
+        public async Task<TeamRunsCollection> ProcessDailyGamesForRound(DateTime roundStartDate)
+        {
+            var teamRunsCollection = new TeamRunsCollection();
+            var currentDate = roundStartDate;
+
+            Console.WriteLine($"=> Start processing the daily games at {DateTime.Now}");
+            while (currentDate <= DateTime.Now)
+            {
+                await UpdateTeamRunsCollectionForDate(teamRunsCollection, currentDate);
+                if (teamRunsCollection.RoundIsOver) break;
+                currentDate = currentDate.AddDays(1);
+            }
+            Console.WriteLine($"=> Completed processing the daily games at {DateTime.Now}");
+
+            return teamRunsCollection;
+        }
+
+        private async Task<TeamRunsCollection> UpdateTeamRunsCollectionForDate(TeamRunsCollection teamRunsCollection, DateTime forDate)
         {
             try
             {
@@ -32,6 +49,8 @@ namespace RunsPoolTracker.AppService
                 if (scoreboardResponseDto == null) return teamRunsCollection;
                 if (scoreboardResponseDto.Scoreboard.GameScore == null) return teamRunsCollection;
 
+                Console.WriteLine($"Processing {scoreboardResponseDto.Scoreboard.GameScore.Count} games for {forDate.ToShortDateString()}");
+                
                 foreach (var gameScore in scoreboardResponseDto.Scoreboard.GameScore)
                 {
                     if (gameScore.IsCompleted == "false") continue;

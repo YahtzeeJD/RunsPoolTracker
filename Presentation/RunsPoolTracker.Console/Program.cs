@@ -12,9 +12,9 @@ namespace RunsPoolTrackerConsole
     {
         private static async Task Main(string[] args)
         {
-            Initialize(out DateTime currentDate, out TeamRunsCollection teamRunsCollection, out DateTime endDate, out MlbAppService appService);
+            Initialize(out DateTime roundStartDate, out MlbAppService appService);
 
-            await ProcessDailyGames(teamRunsCollection, currentDate, endDate, appService);
+            var teamRunsCollection = await appService.ProcessDailyGamesForRound(roundStartDate);
 
             OutputRemainingRunsByTeam(teamRunsCollection);
             OutputRunsByTeamGrid(teamRunsCollection);
@@ -22,15 +22,13 @@ namespace RunsPoolTrackerConsole
             ExitProgram();
         }
 
-        private static void Initialize(out DateTime currentDate, out TeamRunsCollection teamRunsCollection, out DateTime endDate, out MlbAppService appService)
+        private static void Initialize(out DateTime roundStartDate, out MlbAppService appService)
         {
             IConfigurationRoot configuration = InitializeConfiguration();
             Console.WriteLine("Enter the Round #");
             var roundNumber = Console.ReadLine();
-            var roundStartDate = $"round{roundNumber}_start_date";
-            currentDate = Convert.ToDateTime(configuration[roundStartDate]);
-            endDate = DateTime.Now;
-            teamRunsCollection = new TeamRunsCollection();
+            var roundStartDateFromConfig = $"round{roundNumber}_start_date";
+            roundStartDate = Convert.ToDateTime(configuration[roundStartDateFromConfig]);
             appService = new MlbAppService();
         }
 
@@ -41,21 +39,6 @@ namespace RunsPoolTrackerConsole
                                 .AddJsonFile("appsettings.json");
             var configuration = builder.Build();
             return configuration;
-        }
-
-        private static async Task ProcessDailyGames(TeamRunsCollection teamRunsCollection, DateTime currentDate, DateTime endDate, MlbAppService appService)
-        {
-            Console.WriteLine($"=> Start processing the daily games at {DateTime.Now}");
-            while (currentDate <= endDate)
-            {
-                Console.WriteLine($"Processing games for {currentDate.ToString("MM/dd/yyyy")}");
-
-                await appService.UpdateTeamRunsCollectionForDate(teamRunsCollection, currentDate);
-                if (teamRunsCollection.ComputeRemainingRunsByTeam().Any(x => x.RemainingRuns.Count == 0))
-                    break;
-                currentDate = currentDate.AddDays(1);
-            }
-            Console.WriteLine($"=> Completed processing the daily games at {DateTime.Now}");
         }
 
         private static void OutputRemainingRunsByTeam(TeamRunsCollection teamRunsCollection)
