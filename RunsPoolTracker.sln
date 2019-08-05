@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunsPoolTracker.AppService", "AppService\RunsPoolTracker.AppService\RunsPoolTracker.AppService.csproj", "{487F5957-21D3-4BCA-9E24-C6DFD85763B7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Razor", "Razor", "{E163D1D6-ACB7-4578-A420-A6E87F64343C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunsPoolTracker.Razor", "Presentation\Razor\RunsPoolTracker.Razor.csproj", "{C221F233-9081-405E-AE2D-1CE054EB4E94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,10 @@ Global
 		{487F5957-21D3-4BCA-9E24-C6DFD85763B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{487F5957-21D3-4BCA-9E24-C6DFD85763B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{487F5957-21D3-4BCA-9E24-C6DFD85763B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C221F233-9081-405E-AE2D-1CE054EB4E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C221F233-9081-405E-AE2D-1CE054EB4E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C221F233-9081-405E-AE2D-1CE054EB4E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C221F233-9081-405E-AE2D-1CE054EB4E94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +68,8 @@ Global
 		{63A3266C-1E9D-4EA9-A319-BF93128C78C5} = {149A4E8D-D06D-4CA5-90E2-B7DE8C7BFB50}
 		{3046A0BA-B6BD-4E14-A070-617AB7903ECF} = {EEF49861-1471-4FAB-A82E-C3164727FA73}
 		{487F5957-21D3-4BCA-9E24-C6DFD85763B7} = {64FA359B-79E5-4FED-92C4-90A97A919F3E}
+		{E163D1D6-ACB7-4578-A420-A6E87F64343C} = {6EE776A9-FAE0-407B-84E6-61EBE48AA47F}
+		{C221F233-9081-405E-AE2D-1CE054EB4E94} = {E163D1D6-ACB7-4578-A420-A6E87F64343C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1304018-AE97-4AF5-A5D6-BDE6021AAA00}
