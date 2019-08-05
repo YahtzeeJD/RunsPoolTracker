@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using RunsPoolTracker.AppService;
 using RunsPoolTracker.Model;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Razor.Pages
 {
-    public class IndexModel : PageModel
+    public class GridModel : PageModel
     {
         public TeamRunsCollection TeamRunsCollection { get; set; }
         public int Round { get; set; }

@@ -1,24 +1,36 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Runs Pool Tracker Standings";
 }
 
 <div class="text-center">
+    <h2>Round @Model.Round</h2>
+</div>
 
-    <h2>Round 4</h2>
-
-    @{
-        var remainingRuns = Model.TeamRunsCollection.ComputeRemainingRunsByTeam();
-        foreach (var rr in remainingRuns.OrderBy(x => x.RemainingRuns.Count))
-        {
-            <span style="margin-right: 10px;">@rr.TeamName.PadRight(12, ' ')</span>
-            <span style="margin-right: 10px;">@rr.RemainingRuns.Count</span>
-            <span>[@(string.Join(", ", @rr.RemainingRuns))];</span>
-
-            <br />
+<div style="width: 90%;">
+    <div style="margin-top: 10px;" class="container">
+        <div class="row" style="margin-bottom: 3px;">
+            <div class="offset-3 col-sm-3">Team Name</div>
+            <div class="col-sm-2"># Runs</div>
+            <div class="col-sm-3">Runs Left</div>
+        </div>
+        @{
+            var remainingRuns = Model.TeamRunsCollection.ComputeRemainingRunsByTeam();
+            foreach (var rr in remainingRuns.OrderBy(x => x.RemainingRuns.Count))
+            {
+                <div class="row">
+                    <div class="offset-3 col-sm-3">
+                        @rr.TeamName.PadRight(12, ' ')
+                    </div>
+                    <div class="col-sm-2">
+                        @rr.RemainingRuns.Count
+                    </div>
+                    <div class="col-sm-3">
+                        @(string.Join(", ", @rr.RemainingRuns))
+                    </div>
+                </div>
+            }
         }
-    }
-
-
+    </div>
 </div>

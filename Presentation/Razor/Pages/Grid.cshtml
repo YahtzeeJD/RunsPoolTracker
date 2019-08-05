@@ -1,0 +1,33 @@
+﻿@page
+@model GridModel
+@{
+    ViewData["Title"] = "Runs Pool Tracker Grid";
+}
+
+<div class="text-center">
+    <h2>Round @Model.Round</h2>
+</div>
+
+<div style="width: 90%;">
+    <div style="margin-top: 10px;" class="container">
+        <div class="row" style="margin-bottom: 3px;">
+            <div class="col-sm-3">Team Name</div>
+            <div class="col-sm-9">Runs</div>
+        </div>
+        @{
+            var dateOfRunsForTeams = Model.TeamRunsCollection.ComputeDateOfRunsForTeams();
+
+            foreach (var dateOfRunsForTeam in dateOfRunsForTeams)
+            {
+                <div class="row">
+                    <div class="col-sm-3">
+                        @dateOfRunsForTeam.TeamName
+                    </div>
+                    <div class="col-sm-9">
+                        @(string.Join(", ", dateOfRunsForTeam.DateOfRuns))
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

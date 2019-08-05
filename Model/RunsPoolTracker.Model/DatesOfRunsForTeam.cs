@@ -15,9 +15,9 @@ namespace RunsPoolTracker.Model
             foreach (var runsDate in teamRuns.RunsDatesCollection)
             {
                 if (runsDate.Dates.Count == 0)
-                    DateOfRuns.Add("1");
+                    DateOfRuns.Add(string.Empty);
                 else
-                    DateOfRuns.Add($"'{ runsDate.Dates.Min().ToString("MM/dd")}");
+                    DateOfRuns.Add($"{ runsDate.Dates.Min().ToString("MM/dd")}");
             }
         }
     }
