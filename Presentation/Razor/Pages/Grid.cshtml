@@ -8,11 +8,19 @@
     <h2>Round @Model.Round</h2>
 </div>
 
-<div style="width: 90%;">
+<div>
     <div style="margin-top: 10px;" class="container">
         <div class="row" style="margin-bottom: 3px;">
-            <div class="col-sm-3">Team Name</div>
-            <div class="col-sm-9">Runs</div>
+            <div class="col-sm-1">Team Name</div>
+            @{
+                var x = 0;
+                while (x < 14)
+                {
+                    <div class="col-sm-1 text-center">@(@x == 13 ? "13+" : @x.ToString())</div>
+                    x++;
+                }
+            }
+            <div class="col">Runs Left</div>
         </div>
         @{
             var dateOfRunsForTeams = Model.TeamRunsCollection.ComputeDateOfRunsForTeams();
@@ -20,14 +28,18 @@
             foreach (var dateOfRunsForTeam in dateOfRunsForTeams)
             {
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-1">
                         @dateOfRunsForTeam.TeamName
                     </div>
-                    <div class="col-sm-9">
-                        @(string.Join(", ", dateOfRunsForTeam.DateOfRuns))
-                    </div>
+                    @foreach (var dateOfRun in dateOfRunsForTeam.DatesOfRuns)
+                    {
+                        <div class="col-sm-1">
+                            @dateOfRun
+                        </div>
+                    }
                 </div>
             }
+            <div class="col">Runs Left</div>
         }
     </div>
 </div>

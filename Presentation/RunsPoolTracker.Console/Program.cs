@@ -54,7 +54,7 @@ namespace RunsPoolTrackerConsole
             Console.WriteLine("");
             var dateOfRunsForTeams = teamRunsCollection.ComputeDateOfRunsForTeams();
             foreach (var dateOfRunsForTeam in dateOfRunsForTeams)
-                Console.WriteLine($"{dateOfRunsForTeam.TeamName},{string.Join(", ", dateOfRunsForTeam.DateOfRuns)}");
+                Console.WriteLine($"{dateOfRunsForTeam.TeamName},{string.Join(", ", dateOfRunsForTeam.DatesOfRuns)}");
         }
 
         private static void ExitProgram()

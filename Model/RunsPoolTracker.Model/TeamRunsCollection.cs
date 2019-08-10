@@ -102,12 +102,12 @@ namespace RunsPoolTracker.Model
             return remainingRuns;
         }
 
-        public List<DateOfRunsForTeam> ComputeDateOfRunsForTeams()
+        public List<DatesOfRunsForTeam> ComputeDateOfRunsForTeams()
         {
-            var dateOfRunsForTeams = new List<DateOfRunsForTeam>();
+            var dateOfRunsForTeams = new List<DatesOfRunsForTeam>();
             foreach (var teamRuns in ListOfTeamRuns)
             {
-                var dateOfRunsForTeam = new DateOfRunsForTeam(teamRuns);
+                var dateOfRunsForTeam = new DatesOfRunsForTeam(teamRuns);
                 dateOfRunsForTeams.Add(dateOfRunsForTeam);
             }
 

@@ -3,21 +3,21 @@ using System.Linq;
 
 namespace RunsPoolTracker.Model
 {
-    public class DateOfRunsForTeam
+    public class DatesOfRunsForTeam
     {
         public string TeamName { get; set; }
-        public List<string> DateOfRuns { get; set; }
+        public List<string> DatesOfRuns { get; set; }
 
-        public DateOfRunsForTeam(TeamRuns teamRuns)
+        public DatesOfRunsForTeam(TeamRuns teamRuns)
         {
             TeamName = teamRuns.TeamName;
-            DateOfRuns = new List<string>();
+            DatesOfRuns = new List<string>();
             foreach (var runsDate in teamRuns.RunsDatesCollection)
             {
                 if (runsDate.Dates.Count == 0)
-                    DateOfRuns.Add(string.Empty);
+                    DatesOfRuns.Add(string.Empty);
                 else
-                    DateOfRuns.Add($"{ runsDate.Dates.Min().ToString("MM/dd")}");
+                    DatesOfRuns.Add($"{ runsDate.Dates.Min().ToString("MM/dd")}");
             }
         }
     }
