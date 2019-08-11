@@ -50,7 +50,7 @@ namespace RunsPoolTracker.AppService
                 if (scoreboardResponseDto.Scoreboard.GameScore == null) return teamRunsCollection;
 
                 Console.WriteLine($"Processing {scoreboardResponseDto.Scoreboard.GameScore.Count} games for {forDate.ToShortDateString()}");
-                
+
                 foreach (var gameScore in scoreboardResponseDto.Scoreboard.GameScore)
                 {
                     if (gameScore.IsCompleted == "false") continue;
