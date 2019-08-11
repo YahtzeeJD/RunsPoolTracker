@@ -1,0 +1,36 @@
+﻿@page
+@model StandingsModel
+@{
+    ViewData["Title"] = "Runs Pool Tracker Standings";
+}
+
+<div class="text-center">
+    <h2>Round @Model.Round</h2>
+</div>
+
+<div style="width: 90%;">
+    <div style="margin-top: 10px;" class="container">
+        <div class="row" style="margin-bottom: 3px;">
+            <div class="offset-3 col-sm-3">Team Name</div>
+            <div class="col-sm-2"># Runs</div>
+            <div class="col-sm-3">Runs Left</div>
+        </div>
+        @{
+            var remainingRuns = Model.TeamRunsCollection.ComputeRemainingRunsByTeam();
+            foreach (var rr in remainingRuns.OrderBy(x => x.RemainingRuns.Count))
+            {
+                <div class="row">
+                    <div class="offset-3 col-sm-3">
+                        @rr.TeamName.PadRight(12, ' ')
+                    </div>
+                    <div class="col-sm-2">
+                        @rr.RemainingRuns.Count
+                    </div>
+                    <div class="col-sm-3">
+                        @(string.Join(", ", @rr.RemainingRuns))
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
